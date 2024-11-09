@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ol li strong {
+            color: #18284f;
+        }
+
+        a {
+            color: #18284f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+
+    <header class="top-navbar">
+        <h1>AJAX Tutorial</h1>
+        <span id="current-page">Welcome</span>
+    </header>
+
+    <div class="main-container">
+
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#" onclick="loadPage('ajax-what.html')">AJAX - What is AJAX?</a></li>
+                <li><a href="#" onclick="loadPage('ajax-history.html')">AJAX - History</a></li>
+                <li><a href="#" onclick="loadPage('ajax-dynamic-static.html')">AJAX - Dynamic vs Static Sites</a></li>
+                <li><a href="#" onclick="loadPage('ajax-technologies.html')">AJAX - Technologies</a></li>
+                <li><a href="#" onclick="loadPage('ajax-action.html')">AJAX - Action</a></li>
+                <li><a href="#" onclick="loadPage('ajax-xmlhttprequest.html')">AJAX - XMLHttpRequest</a></li>
+                <li><a href="#" onclick="loadPage('ajax-sending-request.html')">AJAX - Sending Request</a></li>
+                <li><a href="#" onclick="loadPage('ajax-types-of-requests.html')">AJAX - Types of Requests</a></li>
+                <li><a href="#" onclick="loadPage('ajax-handling-responses.html')">AJAX - Handling Responses</a></li>
+                <li><a href="#" onclick="loadPage('ajax-handling-binary-data.html')">AJAX - Handling Binary Data</a></li>
+                <li><a href="#" onclick="loadPage('ajax-submitting-forms.html')">AJAX - Submitting Forms</a></li>
+                <li><a href="#" onclick="loadPage('ajax-file-uploading.html')">AJAX - File Uploading</a></li>
+                <li><a href="#" onclick="loadPage('ajax-send-post-requests.html')">AJAX - Send POST Requests</a></li>
+                <li><a href="#" onclick="loadPage('ajax-send-put-requests.html')">AJAX - Send PUT Requests</a></li>
+                <li><a href="#" onclick="loadPage('ajax-send-json-data.html')">AJAX - Send JSON Data</a></li>
+                <li><a href="#" onclick="loadPage('ajax-send-data-objects.html')">AJAX - Send Data Objects</a></li>
+                <li><a href="#" onclick="loadPage('ajax-monitoring-progress.html')">AJAX - Monitoring Progress</a></li>
+                <li><a href="#" onclick="loadPage('ajax-status-codes.html')">AJAX - Status Codes</a></li>
+                <li><a href="#" onclick="loadPage('ajax-applications.html')">AJAX - Applications</a></li>
+            </ul>
+        </nav>
+
+        <main class="content" id="content-area">
+            <h2>Welcome to the AJAX Tutorial</h2>
+            <p>AJAX (Asynchronous JavaScript and XML) is a technique used in web development to create dynamic, interactive web applications. It allows web pages to update data without reloading the entire page.</p>
+
+            <p>In this tutorial, you will learn various aspects of AJAX, including:</p>
+            <ul>
+                <li>What AJAX is and how it works</li>
+                <li>The history of AJAX and its evolution</li>
+                <li>AJAX's role in dynamic vs static websites</li>
+                <li>Technologies used in AJAX</li>
+                <li>How to send different types of requests using AJAX</li>
+                <li>Handling responses and errors</li>
+                <li>Working with binary data and files</li>
+            </ul>
+
+            <p>Select a topic from the sidebar to begin learning about AJAX.</p>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send JSON Data using AJAX</title>
+    <style>
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        ul li strong, ol li code {
+            color: #18284f;
+        }
+        
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+        
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        
+        input {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        
+        button:hover {
+            background-color: #1c3965;
+        }
+        
+        #example {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+            </style>
+</head>
+<body>
+
+<h2>Sending JSON Data using AJAX</h2>
+
+<p>AJAX (Asynchronous JavaScript and XML) is a combination of web technologies that allows dynamic updates of web pages by sending and retrieving data from the server without reloading the entire page.</p>
+
+<p><strong>JSON</strong> (JavaScript Object Notation) is a lightweight data format used for storing and transferring data. It is easy to read and language-independent. AJAX can transport data in JSON format or plain text. In this tutorial, we will learn how to send JSON data using AJAX.</p>
+
+<h3>Steps to Send JSON Data:</h3>
+<ol>
+    <li>Create a new XMLHttpRequest instance: <code>var xhr = new XMLHttpRequest();</code></li>
+    <li>Open the request with the <code>open()</code> method and the target URL.</li>
+    <li>Set the request header using <code>setRequestHeader()</code> to specify that the data is in JSON format (i.e., <code>application/json</code>).</li>
+    <li>Define a callback function to handle the server's response.</li>
+    <li>Create the JSON data that needs to be sent.</li>
+    <li>Convert the JSON data to a string using <code>JSON.stringify()</code>.</li>
+    <li>Send the request with the JSON data using the <code>send()</code> method.</li>
+</ol>
+
+<h3>Example Code:</h3>
+<pre>
+    <code>
+       &lt;script&gt;
+          function sendDoc() {
+             // Creating XMLHttpRequest object
+             var qhttp = new XMLHttpRequest();
+    
+             // Creating callback function to handle the response
+             qhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 201) {
+                   document.getElementById("sample").innerHTML = this.responseText;
+                   console.log("JSON Data Sent Successfully");
+                }
+             };
+    
+             // Open the POST request with the given URL
+             qhttp.open("POST", "https://jsonplaceholder.typicode.com/todos", true);
+    
+             // Set the HTTP request header to specify JSON content
+             qhttp.setRequestHeader('Content-type', 'application/json');
+    
+             // Sending the JSON data to the server
+             qhttp.send(JSON.stringify({
+                "title": "Mickey",
+                "userId": 11,
+                "id": 21,
+                "body": "Mickey lives in London"
+             }));
+          }
+       &lt;/script&gt;
+    </code>
+    </pre>
+    
+
+
+<!-- Button to trigger sending JSON data -->
+<button type="button" onclick="sendDoc()">Uploading Data</button>
+
+<div id="sample"></div>
+
+<h3>How it Works:</h3>
+<p>When you click on the "Uploading Data" button, the <code>sendDoc()</code> function is executed. This function:</p>
+<ol>
+    <li>Creates an XMLHttpRequest object.</li>
+    <li>Sets up the request method to POST and the target URL: <code>https://jsonplaceholder.typicode.com/todos</code>.</li>
+    <li>Sets the content type header to <code>application/json</code>, indicating that the data being sent is in JSON format.</li>
+    <li>Creates a JSON object containing the data to be sent to the server.</li>
+    <li>Converts the JSON object into a string using <code>JSON.stringify()</code> and sends it to the server with the <code>send()</code> method.</li>
+</ol>
+
+<h3>JSON Data Example:</h3>
+<pre>
+{
+   "title": "Mickey",
+   "userId": 11,
+   "id": 21,
+   "body": "Mickey lives in London"
+}
+</pre>
+
+<h3>Response from Server:</h3>
+<p>If the server successfully processes the request, it will return a response indicating that a new resource has been created. The response is displayed in the HTML page, and a message is logged in the console.</p>
+
+<h3>Conclusion:</h3>
+<p>In this tutorial, we've learned how to send JSON data using XMLHttpRequest in AJAX. JSON is a popular data format due to its simplicity and ease of use. This method of data transmission is lightweight and efficient, making it a great choice for dynamic web applications.</p>
+
+</body>
+</html>

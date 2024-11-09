@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX XMLHttpRequest</title>
+    <style>
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li,
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong,
+        ol li code {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        #sample {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #1c3965;}
+    </style>
+    
+</head>
+
+<body>
+
+    <h2>AJAX XMLHttpRequest</h2>
+
+    <p>In AJAX, the XMLHttpRequest object is essential for sending and receiving data asynchronously between the client
+        and server. This allows web pages to update parts of themselves without reloading the entire page, improving the
+        user experience.</p>
+
+    <p>XMLHttpRequest can send data in various formats such as XML, JSON, and plain text. It is commonly used in
+        combination with JavaScript to make asynchronous HTTP requests.</p>
+
+    <h3>XMLHttpRequest Methods</h3>
+    <ul>
+        <li><strong>new XMLHttpRequest()</strong> – Creates a new XMLHttpRequest object.</li>
+        <li><strong>abort()</strong> – Cancels the current request.</li>
+        <li><strong>getAllResponseHeaders()</strong> – Retrieves all header information of the response.</li>
+        <li><strong>getResponseHeader()</strong> – Retrieves a specific header's value from the response.</li>
+        <li><strong>open(method, url, async, user, psw)</strong> – Initializes the request with the HTTP method (e.g.,
+            GET, POST), the URL, and other optional parameters.</li>
+        <li><strong>send()</strong> – Sends the request to the server.</li>
+        <li><strong>setRequestHeader()</strong> – Sets custom headers for the request.</li>
+    </ul>
+
+    <h3>XMLHttpRequest Properties</h3>
+    <ul>
+        <li><strong>onreadystatechange</strong> – A callback function that handles changes in the request state.</li>
+        <li><strong>readyState</strong> – Holds the status of the request, with values from 0 (uninitialized) to 4
+            (completed).</li>
+        <li><strong>responseText</strong> – Contains the server's response as a string.</li>
+        <li><strong>responseXML</strong> – Contains the server's response as XML.</li>
+        <li><strong>status</strong> – Contains the HTTP status code of the response (e.g., 200 for success, 404 for not
+            found).</li>
+        <li><strong>statusText</strong> – Contains the status message corresponding to the HTTP status code (e.g., OK,
+            Not Found).</li>
+    </ul>
+
+    <h3>Usage of XMLHttpRequest</h3>
+    <p>To use XMLHttpRequest, follow these steps:</p>
+    <ol>
+        <li>Create an XMLHttpRequest object: <code>var xhttp = new XMLHttpRequest();</code></li>
+        <li>Define a callback function that will be triggered when the request completes.</li>
+        <li>Use <code>open()</code> to initialize the request and <code>send()</code> to send it to the server.</li>
+    </ol>
+
+    <h3>Example: Fetching Data with XMLHttpRequest</h3>
+    <p>In the following example, we fetch data from a remote server by clicking a button. The data is then displayed on
+        the webpage without refreshing the entire page:</p>
+
+    <div id="sample">
+        <h2>Getting Data</h2>
+        <p>Please click on the button to fetch data:</p>
+        <button type="button" onclick="displayDoc()">Click Me</button>
+    </div>
+
+    
+
+    <h3>Output</h3>
+    <p>The data will be displayed in the area above after clicking the button. The page will update without refreshing,
+        demonstrating how XMLHttpRequest works to fetch and display data asynchronously.</p>
+
+    <h3>Conclusion</h3>
+    <p>XMLHttpRequest is a core component of AJAX, enabling asynchronous communication between the client and server. By
+        using XMLHttpRequest, web developers can create dynamic, interactive web pages that can load data and update
+        content without reloading the entire page, providing a better user experience.</p>
+
+    <p>In the next tutorial, we will explore how to send data using XMLHttpRequest and how it interacts with the server.
+    </p>
+
+</body>
+
+</html>

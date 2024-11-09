@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX - What is AJAX?</title>
+    <style>
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #18284f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h2>AJAX - What is AJAX?</h2>
+
+    <p>
+        AJAX, short for Asynchronous JavaScript and XML, is not a standalone technology or programming language.
+        Instead, it’s a blend of various web technologies, including HTML, XHTML, CSS, JavaScript, DOM, XML, XSLT, and
+        the XMLHttpRequest object. This approach allows developers to build web applications that interact dynamically
+        with users, making requests to web servers in the background to fetch necessary data. AJAX enables parts of a
+        web page to be updated without requiring a full page reload.
+    </p>
+
+    <p>
+        Compared to traditional web applications, AJAX applications are generally faster and more responsive. By
+        allowing communication between the client and server to happen in the background, AJAX provides a seamless
+        experience where users can interact with the foreground without interruption.
+    </p>
+
+    <p>
+        In an AJAX setup, data exchange between the web browser and server is asynchronous, meaning requests are
+        submitted without pausing application execution. This way, the requested data is processed and displayed as soon
+        as it’s returned. A real-world example is Facebook’s “like” functionality, where clicking “like” updates the
+        count without refreshing the entire page.
+    </p>
+
+    <h3>How AJAX Works</h3>
+    <p>
+        Traditional web applications work by linking separate pages, where each user action often triggers a new HTTP
+        request, resulting in a full page reload. This approach leads to frequent page refreshes and waiting times as
+        users navigate between sections.
+    </p>
+
+    <p>
+        AJAX revolutionizes this model by exchanging minimal data between the browser and server asynchronously, leading
+        to faster applications that feel more like desktop applications. It enables seamless updates by replacing
+        loosely connected web pages with tightly integrated sections, with AJAX acting as an intermediary layer. This
+        “AJAX engine” sits between the web application and the server, allowing background server calls using
+        JavaScript. It updates only the necessary part of the page, reducing refresh times and enhancing user
+        responsiveness. The asynchronous process also reduces server workload, leading to faster and more responsive
+        server performance.
+    </p>
+
+    <h3>Core AJAX Technologies</h3>
+    <p>
+        AJAX leverages several established technologies, making it compatible with most modern browsers. No additional
+        modules are required on the client side. Here are the core technologies that power AJAX:
+    </p>
+    <ul>
+        <li><strong>JavaScript:</strong> Provides the core functionality needed to create client-side interactivity and
+            build AJAX applications.</li>
+        <li><strong>XML:</strong> Allows structured data exchange between the server and client.</li>
+        <li><strong>XMLHttpRequest:</strong> Facilitates asynchronous data exchange between the browser and server.</li>
+        <li><strong>HTML and CSS:</strong> Define the webpage structure and style.</li>
+        <li><strong>DOM (Document Object Model):</strong> Enables dynamic interaction with the webpage’s layout and
+            content.</li>
+    </ul>
+
+    <h3>Benefits of Using AJAX</h3>
+    <ul>
+        <li>Allows for responsive, interactive web applications.</li>
+        <li>Supports frameworks and design patterns that speed up development.</li>
+        <li>Maximizes use of existing web technologies instead of introducing new ones.</li>
+        <li>Enables asynchronous calls, so clients don’t need to wait for data to arrive to begin rendering.</li>
+    </ul>
+
+    <h3>Limitations of AJAX</h3>
+    <ul>
+        <li>Relies heavily on JavaScript, meaning any issues with JavaScript in the browser affect AJAX functionality.
+        </li>
+        <li>Debugging AJAX applications can be challenging.</li>
+        <li>Bookmarking AJAX-enabled pages may require additional planning.</li>
+        <li>Failed requests can impact page functionality.</li>
+        <li>Browsers with JavaScript disabled won’t support AJAX-based pages.</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p>
+        AJAX is an excellent choice for creating dynamic, responsive web applications. Its asynchronous functionality
+        enables smooth client-server interaction without the need for full-page refreshes. In the next article, we’ll
+        explore the history of AJAX.
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload with AJAX</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1 {
+            margin: 0;
+        }
+
+        
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li,
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong,
+        ol li code {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #fdfdfd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1c3965;
+        }
+    </style>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(x){
+      // Prevent page refresh
+      x.preventDefault();
+   
+      // Select the file from the system
+      const myFile = document.getElementById('file').files[0];
+   
+      // Create a FormData object to store the file
+      const myData = new FormData();
+      myData.append("newFiles", myFile);
+   
+      // Create an XMLHttpRequest object
+      var myhttp = new XMLHttpRequest();
+   
+      // Callback function to handle the response
+      myhttp.onreadystatechange = function(){
+         if (myhttp.readyState == 4 && myhttp.status == 200) {
+            console.log("File uploaded successfully");
+         }
+      };
+   
+      // Open the connection to the server
+      myhttp.open("POST", "https://httpbin.org/post", true);
+   
+      // Set headers
+      myhttp.setRequestHeader("Content-Type", "multipart/form-data");
+   
+      // Send the file to the server
+      myhttp.send(myData);
+      const myButton = document.querySelector('button');
+   myButton.addEventListener('click', () => {
+      // Get all the input files in DOM with type "file"
+      const inputFiles = document.querySelectorAll('input[type="file"]');
+   
+      // Add input files to an array
+      const myFiles = [];
+      inputFiles.forEach((input) => myFiles.push(input.files[0]));
+   
+      // Create a FormData object
+      const myFormData = new FormData();
+   
+      // Append files to the FormData object
+      myFiles.forEach((file, index) => {
+         myFormData.append(`file${index}`, file, file.name);
+      });
+   
+      // Create an XMLHttpRequest object
+      var myhttp = new XMLHttpRequest();
+   
+      // Callback function to handle the response
+      myhttp.onreadystatechange = function(){
+         if (myhttp.readyState == 4 && myhttp.status == 200) {
+            console.log("Files uploaded successfully");
+         }
+      };
+   
+      // Open the connection to the server
+      myhttp.open("POST", "https://httpbin.org/post", true);
+   
+      // Set headers
+      myhttp.setRequestHeader("Content-Type", "multipart/form-data");
+   
+      // Send the files to the server
+      myhttp.send(myFormData);
+   });
+   });
+    </script>
+</head>
+<body>
+
+<div>
+
+    <div>
+        <section>
+            <h2>What is File Upload with AJAX?</h2>
+            <p>AJAX provides a flexible way to upload files to a server asynchronously without refreshing the page. By using the <code>FormData</code> object in conjunction with XMLHttpRequest, you can upload single or multiple files with ease.</p>
+
+            <h3>Uploading a Single File:</h3>
+            <p>To upload a single file, you can follow these steps:</p>
+            <ol>
+                <li><strong>Create a form</strong> with a file input field and a submit button.</li>
+                <li><strong>Prevent page refresh</strong> on form submission using JavaScript.</li>
+                <li><strong>Get the selected file</strong> from the input field.</li>
+                <li><strong>Create a FormData object</strong> to hold the file data.</li>
+                <li><strong>Create an XMLHttpRequest</strong> object to send the file to the server.</li>
+                <li><strong>Handle the server response</strong> to confirm successful file upload.</li>
+            </ol>
+
+            <h3>Example: Uploading a Single File</h3>
+            <p>This example demonstrates uploading a single file to the server using AJAX:</p>
+
+            <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;!-- Creating a form to upload a file -->  
+&lt;form id="myForm"&gt;
+   &lt;input type="file" id="file"&gt;&lt;br&gt;&lt;br&gt;
+   &lt;button type="submit"&gt;Upload File&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+   document.getElementById('myForm').addEventListener('submit', function(x){
+      // Prevent page refresh
+      x.preventDefault();
+   
+      // Select the file from the system
+      const myFile = document.getElementById('file').files[0];
+   
+      // Create a FormData object to store the file
+      const myData = new FormData();
+      myData.append("newFiles", myFile);
+   
+      // Create an XMLHttpRequest object
+      var myhttp = new XMLHttpRequest();
+   
+      // Callback function to handle the response
+      myhttp.onreadystatechange = function(){
+         if (myhttp.readyState == 4 && myhttp.status == 200) {
+            console.log("File uploaded successfully");
+         }
+      };
+   
+      // Open the connection to the server
+      myhttp.open("POST", "https://httpbin.org/post", true);
+   
+      // Set headers
+      myhttp.setRequestHeader("Content-Type", "multipart/form-data");
+   
+      // Send the file to the server
+      myhttp.send(myData);
+   });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+            </pre>
+            <form id="myForm">
+                <input type="file" id="file"><br><br>
+                <button type="submit">Upload File</button>
+             </form>
+             
+            <h3>Output:</h3>
+            <p>When the user selects a file and clicks "Upload File," the file is sent to the server asynchronously. The server’s response will be logged in the console once the upload is successful.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Uploading Multiple Files:</h2>
+            <p>If you need to upload multiple files, the process is similar, but you’ll need to select multiple files from the file input field and add them to the FormData object.</p>
+
+            <h3>Example: Uploading Multiple Files</h3>
+            <p>In the following example, two files are selected and uploaded to the server using AJAX:</p>
+
+            <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;!-- Creating a form to upload multiple files -->  
+&lt;h2&gt; Uploading Multiple Files&lt;/h2&gt;  
+&lt;input type="file"&gt;
+&lt;input type="file"&gt;
+&lt;button&gt;Submit&lt;/button&gt;
+
+&lt;script&gt;
+   const myButton = document.querySelector('button');
+   myButton.addEventListener('click', () => {
+      // Get all the input files in DOM with type "file"
+      const inputFiles = document.querySelectorAll('input[type="file"]');
+   
+      // Add input files to an array
+      const myFiles = [];
+      inputFiles.forEach((input) => myFiles.push(input.files[0]));
+   
+      // Create a FormData object
+      const myFormData = new FormData();
+   
+      // Append files to the FormData object
+      myFiles.forEach((file, index) => {
+         myFormData.append(`file${index}`, file, file.name);
+      });
+   
+      // Create an XMLHttpRequest object
+      var myhttp = new XMLHttpRequest();
+   
+      // Callback function to handle the response
+      myhttp.onreadystatechange = function(){
+         if (myhttp.readyState == 4 && myhttp.status == 200) {
+            console.log("Files uploaded successfully");
+         }
+      };
+   
+      // Open the connection to the server
+      myhttp.open("POST", "https://httpbin.org/post", true);
+   
+      // Set headers
+      myhttp.setRequestHeader("Content-Type", "multipart/form-data");
+   
+      // Send the files to the server
+      myhttp.send(myFormData);
+   });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+            </pre>
+            <input type="file">
+<input type="file">
+<button>Submit</button>
+            <h3>Output:</h3>
+            <p>After the user selects two files and clicks the "Submit" button, both files are sent to the server asynchronously. The server’s response will be logged in the console once the upload completes successfully.</p>
+        </section>
+
+        <section class="conclusion">
+            <h2>Conclusion</h2>
+            <p>AJAX provides a convenient way to upload files to a server without refreshing the page. Using XMLHttpRequest with FormData, you can easily send one or multiple files to the server and handle the server’s response dynamically. In the next tutorial, we'll dive deeper into how to create and manipulate FormData objects with XMLHttpRequest.</p>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

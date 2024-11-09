@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitting Forms with AJAX</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1 {
+            margin: 0;
+        }
+
+        
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li,
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong,
+        ol li code {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #fdfdfd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1c3965;
+        }
+    </style>
+</head>
+<body>
+
+<div >
+    
+
+    
+
+    <div >
+        <section>
+            <h2>What is AJAX Form Submission?</h2>
+            <p>AJAX allows you to submit form data asynchronously without refreshing the page. This results in a smoother user experience by sending the data in the background and receiving the server's response without interrupting the page flow.</p>
+
+            <h3>Steps for Submitting Forms Using AJAX:</h3>
+            <p>To submit a form using AJAX, follow these steps:</p>
+            <ol>
+                <li><strong>Create an XMLHttpRequest object</strong> using <code>new XMLHttpRequest()</code>.</li>
+                <li><strong>Select the form element</strong> using <code>document.querySelector()</code> and collect all key-value pairs.</li>
+                <li><strong>Create a FormData object</strong> by passing the form element into the <code>FormData()</code> constructor.</li>
+                <li><strong>Create a callback function</strong> to handle the server's response. This function should be defined inside the <code>onreadystatechange</code> property of the XMLHttpRequest object.</li>
+                <li><strong>Open the connection</strong> using the <code>open()</code> method and specify the POST method and the server URL.</li>
+                <li><strong>Send the data</strong> using the <code>send()</code> method, passing the FormData object.</li>
+            </ol>
+
+            <h3>Example:</h3>
+            <p>This example demonstrates how to collect data from a form, send it asynchronously using AJAX, and display the server's response.</p>
+
+            <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;script&gt;
+   function sendFormData() {
+      // Creating XMLHttpRequest object
+      var zhttp = new XMLHttpRequest();
+      const mFormEle = document.querySelector("#mForm");
+      // Creating FormData object
+      const myForm = new FormData(mFormEle);
+      // Creating callback function to handle the response
+      zhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 201) {
+            document.getElementById("example").innerHTML = this.responseText;
+            console.log("Form Data Posted Successfully");
+         }
+      };
+      // Post/Add form data to the server
+      zhttp.open("POST", "https://jsonplaceholder.typicode.com/todos", true);
+      // Sending the request to the server
+      zhttp.send(myForm);
+   }
+&lt;/script&gt;
+
+&lt;!-- Creating simple form --&gt;
+&lt;form id="mForm"&gt;
+   &lt;h2&gt;Enter the requested Data&lt;/h2&gt;
+   &lt;label for="Utitle"&gt;Title&lt;/label&gt;
+   &lt;input id="Utitle" type="text" name="title"&gt;&lt;br&gt;
+
+   &lt;label for="UId"&gt;UserId&lt;/label&gt;
+   &lt;input id="UId" type="number" name="UserID"&gt;&lt;br&gt;
+
+   &lt;label for="Ubody"&gt;Body&lt;/label&gt;
+   &lt;input id="Ubody" type="text" name="body"&gt;&lt;br&gt;
+
+   &lt;label for="Uage"&gt;Age&lt;/label&gt;
+   &lt;input id="Uage" type="number" name="age"&gt;&lt;br&gt;
+
+   &lt;button type="button" onclick="sendFormData()"&gt;Submit Record&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;div id="example"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+            </pre>
+            <button type="button" onclick="sendFormData()">Click Here</button>
+            <h3 id="example">Output:</h3>
+            <p>Clicking the "Submit Record" button will trigger the <code>sendFormData()</code> function. The function will send the form data to the server, and upon receiving a successful response, the result will be displayed below the form.</p>
+        </section>
+
+        <section class="conclusion">
+            <h2>Conclusion</h2>
+            <p>AJAX is a powerful technique for submitting forms asynchronously without requiring a page refresh. By using XMLHttpRequest with the FormData object, you can send form data to the server and handle the response dynamically. In the next tutorial, we'll explore how to upload files using AJAX.</p>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

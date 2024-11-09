@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Data Object using AJAX</title>
+    <style>
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        ul li strong, ol li code {
+            color: #18284f;
+        }
+        
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+        
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        
+        input {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        
+        button:hover {
+            background-color: #1c3965;
+        }
+        
+        #example {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+            </style>
+    
+    
+</head>
+<body>
+
+<h2>Sending Data Object using AJAX</h2>
+
+<p>In AJAX, we can send data objects as part of an HTTP request from a client to a web server. A data object is simply a JavaScript object that contains data in key-value pairs. These objects can represent any type of data, including form inputs, user data, or other information that needs to be sent to the server for processing.</p>
+
+<p>To send a data object using AJAX, we must convert the object into a JSON string using <code>JSON.stringify()</code>. This is necessary because most web frameworks easily support JSON format without additional effort.</p>
+
+<h3>Steps to Send Data Object:</h3>
+<ol>
+    <li>Create a new XMLHttpRequest instance: <code>var xhr = new XMLHttpRequest();</code></li>
+    <li>Set up the request method and URL using <code>open()</code>.</li>
+    <li>Set the request header using <code>setRequestHeader()</code> to indicate that the request contains JSON data.</li>
+    <li>Create a data object containing the data to send to the server.</li>
+    <li>Convert the data object to a JSON string using <code>JSON.stringify()</code>.</li>
+    <li>Send the JSON string using the <code>send()</code> method.</li>
+</ol>
+
+<h3>Example Code:</h3>
+
+<pre>
+    <code>
+       &lt;script&gt;
+          function sendDataObject() {
+             // Creating XMLHttpRequest object
+             var qhttp = new XMLHttpRequest();
+          
+             // Creating data object
+             var myDataObject = {
+                "name": "Monika",
+                "City": "Delhi",
+                "Age": 32,
+                "Contact Number": 33333333
+             }
+          
+             // Creating callback function to handle the response
+             qhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 201) {
+                   document.getElementById("sample").innerHTML = this.responseText;
+                   console.log("Data object sent successfully");
+                }
+             };
+          
+             // Open the POST request with the given URL
+             qhttp.open("POST", "https://jsonplaceholder.typicode.com/todos", true);
+          
+             // Set the HTTP request header to specify JSON content
+             qhttp.setRequestHeader('Content-type', 'application/json');
+          
+             // Convert the data object to a JSON string
+             var myData = JSON.stringify(myDataObject);
+          
+             // Send the JSON data to the server
+             qhttp.send(myData);
+          }
+       &lt;/script&gt;
+    </code>
+    </pre>
+    
+
+<!-- Button to trigger sending the data object -->
+<button type="button" onclick="sendDataObject()">Submit</button>
+
+<div id="sample"></div>
+
+<h3>How it Works:</h3>
+<p>When you click on the "Submit" button, the <code>sendDataObject()</code> function is triggered. This function:</p>
+<ol>
+    <li>Creates a new XMLHttpRequest object.</li>
+    <li>Defines a data object containing the information to be sent to the server.</li>
+    <li>Sets up the request with the POST method and the target URL: <code>https://jsonplaceholder.typicode.com/todos</code>.</li>
+    <li>Sets the content type header to <code>application/json</code>, indicating the data is in JSON format.</li>
+    <li>Converts the data object to a JSON string using <code>JSON.stringify()</code>.</li>
+    <li>Calls the <code>send()</code> method to send the data object to the server.</li>
+</ol>
+
+<h3>Data Object Example:</h3>
+<pre>
+{
+   "name": "Monika",
+   "City": "Delhi",
+   "Age": 32,
+   "Contact Number": 33333333
+}
+</pre>
+
+<h3>Response from Server:</h3>
+<p>If the server successfully processes the request, it returns a response, which is displayed in the HTML page. A confirmation message is also logged in the console.</p>
+
+<h3>Conclusion:</h3>
+<p>In this tutorial, we've demonstrated how to send data objects to the server using AJAX. By converting JavaScript objects into JSON strings, we can easily transmit structured data, allowing us to update and process data without refreshing the entire page.</p>
+
+</body>
+</html>

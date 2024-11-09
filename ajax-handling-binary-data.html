@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Binary Data in AJAX</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1 {
+            margin: 0;
+        }
+
+        
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li,
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong,
+        ol li code {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #fdfdfd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1c3965;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+
+
+    <div >
+        <section>
+            <h2>What is Binary Data?</h2>
+            <p>Binary data refers to information stored in binary format, rather than plain text. It includes files such as images, videos, audio, and other non-text files. Binary data is transmitted through AJAX using an XMLHttpRequest object by setting the appropriate headers and response types.</p>
+
+            <h3>Handling Binary Data in AJAX:</h3>
+            <p>To handle binary data in AJAX, we need to set two important properties:</p>
+            <ul>
+                <li><strong>Content-Type</strong>: The MIME type used to send binary data (e.g., <code>image/jpeg</code>, <code>audio/mp3</code>).</li>
+                <li><strong>responseType</strong>: The type of response expected. Set this to <code>arraybuffer</code> or <code>blob</code> for binary data.</li>
+            </ul>
+
+            <h3>Sending Binary Data:</h3>
+            <p>To send binary data, use the <code>send()</code> method of XMLHttpRequest, which supports transmission of binary data through ArrayBuffer, Blob, or File objects.</p>
+
+            <h3>Example:</h3>
+            <p>This example demonstrates how to retrieve binary data from the server and process it using AJAX. We use <code>arraybuffer</code> as the response type, which allows the response to be accessed as raw binary data.</p>
+
+            <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;script&gt;
+   function getBinaryData() {
+      // Creating XMLHttpRequest object
+      var myhttp = new XMLHttpRequest();
+      // Getting binary data
+      myhttp.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+      // Set responseType to arraybuffer.
+      myhttp.responseType = "arraybuffer";
+      // Creating callback function
+      myhttp.onload = (event) => {
+         // IF the request is successful
+         if (myhttp.status === 200){
+            var arraybuffer = myhttp.response;
+            // Convert the arraybuffer into array
+            var data = new Uint8Array(arraybuffer);
+            // Display the binary data
+            document.getElementById("example").innerHTML = data;
+            console.log("Binary data Received");
+         } else {
+            console.log("Found error");
+         }
+      };
+      // Sending the request to the server
+      myhttp.send();
+   }
+&lt;/script&gt;
+&lt;div id="example"&gt;
+   &lt;p&gt;AJAX Example&lt;/p&gt;
+   &lt;button type="button" onclick="getBinaryData()"&gt;Click Here&lt;/button&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+            </pre>
+            <button onclick="getBinaryData()">Click Here</button>
+            <h3>Output:</h3>
+            <p id="example">Click the button to fetch binary data from the server. If the request is successful, the binary data will be logged to the console, and its bytes will be displayed on the page.</p>
+        </section>
+
+        <section class="conclusion">
+            <h2>Conclusion</h2>
+            <p>Handling binary data with AJAX is crucial for transferring non-text files like images or videos. By converting binary data into an appropriate format like <code>Uint8Array</code>, you can manipulate it directly or display it within the page. The key steps include setting the correct <code>responseType</code> and handling the data efficiently. In the next article, we will learn how to submit forms using AJAX.</p>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

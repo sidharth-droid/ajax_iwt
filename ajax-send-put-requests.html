@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX PUT Request Tutorial</title>
+    <style>
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        ul li strong, ol li code {
+            color: #18284f;
+        }
+        
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+        
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        
+        input {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        
+        button:hover {
+            background-color: #1c3965;
+        }
+        
+        #example {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+            </style>
+</head>
+<body>
+
+<h2>Sending a PUT Request using AJAX</h2>
+
+<p>The PUT request is used to update data on a web server. In this request, the data is sent in the request body, and the web server replaces the existing data with the new data. If the specified data does not exist, it will add the new data as a new record on the server.</p>
+
+<p><strong>Syntax:</strong><br>
+<code>open('PUT', url, true)</code><br>
+Where:<br>
+- <code>PUT</code> is the method used to update data.<br>
+- <code>url</code> represents the URL of the resource on the server.<br>
+- <code>true</code> sets the request to be asynchronous.
+</p>
+
+<h3>Steps to Send a PUT Request:</h3>
+<ol>
+    <li>Create an XMLHttpRequest object: <code>var xhttp = new XMLHttpRequest();</code></li>
+    <li>Define a callback function to handle the server's response.</li>
+    <li>Use the <code>open()</code> method with the <code>PUT</code> method and the target URL.</li>
+    <li>Set the request header using <code>setRequestHeader()</code>, specifying the content type as JSON.</li>
+    <li>Send the data to the server using <code>send()</code>.</li>
+</ol>
+
+<h3>Example Code:</h3>
+<pre>
+    <code>
+       &lt;script&gt;
+          function updateDoc() {
+             // Creating XMLHttpRequest object
+             var uhttp = new XMLHttpRequest();
+          
+             // Creating callback function to handle the response
+             uhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                   document.getElementById("sample").innerHTML = this.responseText;
+                   console.log("Data updated successfully");
+                }
+             };
+             
+             // Open PUT request to the server URL
+             uhttp.open("PUT", "https://jsonplaceholder.typicode.com/todos/21", true);
+          
+             // Set the HTTP request header to JSON
+             uhttp.setRequestHeader('Content-type', 'application/json');
+          
+             // Send the JSON document to the server
+             uhttp.send(JSON.stringify({
+                "title": "ApplePie",
+                "userId": 12,
+                "id": 32,
+                "body": "ApplePie is made up of Apple"
+             }));
+          }
+       &lt;/script&gt;
+    </code>
+    </pre>
+    
+<p>Below is an example that demonstrates how to send a PUT request using XMLHttpRequest:</p>
+
+
+
+<!-- Button to trigger the PUT request -->
+<button type="button" onclick="updateDoc()">Update Record</button>
+
+<div id="sample"></div>
+
+<h3>How it Works:</h3>
+<p>When the user clicks the "Update Record" button, the <code>updateDoc()</code> function is triggered. This function:</p>
+<ol>
+    <li>Creates an XMLHttpRequest object.</li>
+    <li>Sets up a callback function to handle the response from the server.</li>
+    <li>Opens a PUT request to the server with the URL <code>https://jsonplaceholder.typicode.com/todos/21</code> (the record with ID 21 is updated).</li>
+    <li>Sets the content type header to "application/json".</li>
+    <li>Converts the JSON data into a string using <code>JSON.stringify()</code> and sends it to the server.</li>
+</ol>
+
+<h3>Difference Between PUT and POST Requests:</h3>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>PUT Request</th>
+        <th>POST Request</th>
+    </tr>
+    <tr>
+        <td>Used to update an existing resource.</td>
+        <td>Used to create a new resource.</td>
+    </tr>
+    <tr>
+        <td>Sends the entire resource as the payload.</td>
+        <td>Sends only the part of the resource to be updated.</td>
+    </tr>
+    <tr>
+        <td>Can be cached.</td>
+        <td>Cannot be cached.</td>
+    </tr>
+    <tr>
+        <td>Idempotent: Multiple identical requests will have the same effect.</td>
+        <td>Non-idempotent: Multiple identical requests will create multiple resources.</td>
+    </tr>
+</table>
+
+<h3>Conclusion:</h3>
+<p>In this tutorial, we learned how to send a PUT request using XMLHttpRequest. PUT is primarily used to update or modify existing data on a server. The PUT request is idempotent, meaning sending the same request multiple times results in the same outcome.</p>
+
+</body>
+</html>

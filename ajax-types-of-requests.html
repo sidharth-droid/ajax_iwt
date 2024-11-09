@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of AJAX Requests</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h1 {
+            margin: 0;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #ffffff;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background-color: #1c3965;
+        }
+
+        #example,
+        #postResponse,
+        #putResponse,
+        #deleteResponse {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Types of AJAX Requests</h1>
+        <p>AJAX allows sending different types of requests to interact with web servers dynamically.</p>
+    </header>
+
+    <section>
+        <h2>Overview</h2>
+        <p>AJAX supports various HTTP request methods to communicate with a server and update web content without
+            reloading the page. The primary request types are:</p>
+        <ul>
+            <li><strong>GET:</strong> Retrieve data from the server.</li>
+            <li><strong>POST:</strong> Send data to the server.</li>
+            <li><strong>PUT:</strong> Update data on the server.</li>
+            <li><strong>DELETE:</strong> Remove data from the server.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>GET Request</h2>
+        <p>The GET request retrieves data from the server, with data typically passed in the URL.</p>
+        <p><strong>Syntax:</strong> <code>open("GET", url, true)</code></p>
+        <p><strong>Example:</strong> Fetching a record with <code>id = 6</code> from the server:</p>
+        <pre><code>function displayRecords() {
+   var zhttp = new XMLHttpRequest();
+   zhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+         document.getElementById("example").innerHTML = this.responseText;
+      }
+   };
+   zhttp.open("GET", "https://jsonplaceholder.typicode.com/todos/6", true);
+   zhttp.send();
+}</code></pre>
+        <button onclick="displayRecords()">Fetch Data</button>
+        <div id="example">
+            <p>Data will display here after request.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>POST Request</h2>
+        <p>The POST request sends data to the server in the request body, often used for creating or submitting data.
+        </p>
+        <p><strong>Syntax:</strong> <code>open("POST", url, true)</code></p>
+        <p><strong>Example:</strong> Sending data to create a new record:</p>
+        <pre><code>function sendDoc() {
+   var qhttp = new XMLHttpRequest();
+   qhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 201) {
+         document.getElementById("postResponse").innerHTML = "Data sent successfully!";
+      }
+   };
+   qhttp.open("POST", "https://jsonplaceholder.typicode.com/todos", true);
+   qhttp.setRequestHeader("Content-type", "application/json");
+   qhttp.send(JSON.stringify({
+      "title": "Sample Title",
+      "userId": 1,
+      "body": "Sample body content"
+   }));
+}</code></pre>
+        <button onclick="sendDoc()">Send POST Request</button>
+        <div id="postResponse">
+            <p>Response will display here after request.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>PUT Request</h2>
+        <p>The PUT request updates an existing record on the server.</p>
+        <p><strong>Syntax:</strong> <code>open("PUT", url, true)</code></p>
+        <p><strong>Example:</strong> Updating a record with <code>id = 1</code>:</p>
+        <pre><code>function updateDoc() {
+   var uhttp = new XMLHttpRequest();
+   uhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+         document.getElementById("putResponse").innerHTML = "Record updated successfully!";
+      }
+   };
+   uhttp.open("PUT", "https://jsonplaceholder.typicode.com/todos/1", true);
+   uhttp.setRequestHeader("Content-type", "application/json");
+   uhttp.send(JSON.stringify({
+      "title": "Updated Title",
+      "userId": 1,
+      "body": "Updated body content"
+   }));
+}</code></pre>
+        <button onclick="updateDoc()">Send PUT Request</button>
+        <div id="putResponse">
+            <p>Response will display here after request.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>DELETE Request</h2>
+        <p>The DELETE request removes a specified record from the server.</p>
+        <p><strong>Syntax:</strong> <code>open("DELETE", url, true)</code></p>
+        <p><strong>Example:</strong> Deleting a record with <code>id = 2</code>:</p>
+        <pre><code>function delDoc() {
+   var dhttp = new XMLHttpRequest();
+   dhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+         document.getElementById("deleteResponse").innerHTML = "Record deleted successfully!";
+      }
+   };
+   dhttp.open("DELETE", "https://jsonplaceholder.typicode.com/todos/2", true);
+   dhttp.send();
+}</code></pre>
+        <button onclick="delDoc()">Send DELETE Request</button>
+        <div id="deleteResponse">
+            <p>Response will display here after request.</p>
+        </div>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sending Requests with AJAX</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h1 {
+            margin: 0;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li,
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong,
+        ol li code {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #fdfdfd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1c3965;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sending Requests in AJAX</h1>
+        <p>Learn how to use AJAX to send data requests to a server using XMLHttpRequest.</p>
+    </header>
+
+    <section>
+        <h2>Types of Requests in AJAX</h2>
+        <p>AJAX allows several types of HTTP requests:</p>
+        <ul>
+            <li><strong>GET:</strong> Retrieve data from the server.</li>
+            <li><strong>POST:</strong> Send data to the server.</li>
+            <li><strong>PUT:</strong> Update existing data on the server.</li>
+            <li><strong>DELETE:</strong> Remove data from the server.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>XMLHttpRequest Methods for Sending Requests</h2>
+        <p>To create and send a request, the <code>XMLHttpRequest</code> object uses two main methods:</p>
+        <ul>
+            <li><strong>open(method, url, async)</strong>: Establishes a connection to the server.</li>
+            <li><strong>send()</strong>: Sends the request to the server.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>The open() Method</h2>
+        <p>The <code>open()</code> method initializes the request by setting the HTTP method (GET, POST, etc.), the URL
+            of the server, and the connection type (synchronous or asynchronous).</p>
+        <p><strong>Syntax:</strong> <code>open(method, url, async)</code></p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>method</strong>: HTTP method to be used, e.g., GET or POST.</li>
+            <li><strong>url</strong>: URL of the file or API endpoint on the server.</li>
+            <li><strong>async</strong>: Set to <code>true</code> for asynchronous, <code>false</code> for synchronous
+                (default is true).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>The send() Method</h2>
+        <p>The <code>send()</code> method sends the request to the server. For a GET request, <code>send()</code> is
+            called without parameters. For a POST request, data can be passed as an argument to <code>send(data)</code>.
+        </p>
+    </section>
+
+    <section>
+        <h2>Example: Sending a GET Request</h2>
+        <p>Below is an example of using the <code>XMLHttpRequest</code> object to fetch data from a server.</p>
+        <pre><code>function showData() {
+   let xhr = new XMLHttpRequest();
+   xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+         document.getElementById("output").innerHTML = xhr.responseText;
+      }
+   };
+   xhr.open("GET", "https://jsonplaceholder.typicode.com/todos/3", true);
+   xhr.send();
+}</code></pre>
+    </section>
+
+    <section>
+        <h2>Try it Out</h2>
+        <div id="output">
+            <p>Click the button to fetch data from the server:</p>
+            <button onclick="showData()">Fetch Data</button>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

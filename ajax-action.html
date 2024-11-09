@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX - Action Steps</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ol li strong {
+            color: #18284f;
+        }
+
+        a {
+            color: #18284f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Steps of an AJAX Operation</h2>
+
+    <p>This chapter covers the key steps involved in an AJAX operation, from client-side events to updating the HTML
+        DOM.</p>
+
+    <h3>Steps in an AJAX Operation</h3>
+    <ol>
+        <li><strong>A client event occurs:</strong> Triggers a JavaScript function, such as an onkeyup event in an input
+            field.</li>
+        <li><strong>Creating an XMLHttpRequest object:</strong> This object facilitates asynchronous communication with
+            the server.</li>
+        <li><strong>Configuring the XMLHttpRequest:</strong> Prepares the request and defines the callback function.
+        </li>
+        <li><strong>Sending an asynchronous request:</strong> Makes a background request to the server using the
+            configured XMLHttpRequest.</li>
+        <li><strong>Receiving server response:</strong> The server responds with data in XML or JSON format.</li>
+        <li><strong>Processing the callback function:</strong> Processes the server response with the specified
+            callback.</li>
+        <li><strong>Updating the HTML DOM:</strong> Modifies web page elements dynamically based on the response.</li>
+    </ol>
+
+
+</body>
+
+</html>

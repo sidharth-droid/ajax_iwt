@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handling Responses in AJAX</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1 {
+            margin: 0;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        ul li,
+        ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        ul li strong,
+        ol li code {
+            color: #18284f;
+        }
+
+        code {
+            background-color: #fdfdfd;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1c3965;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tutorial">
+
+    <div >
+        <section >
+            <h2>What is Handling Responses in AJAX?</h2>
+            <p>Handling responses is the process of dealing with the data returned by the server after an AJAX request. Once an AJAX request is sent, the client-side JavaScript waits for the server's response. After receiving the response, it processes the data, updates the page content, or handles errors if any occur.</p>
+
+            <h3>Steps to Handle Responses:</h3>
+            <ol>
+                <li>Create an XMLHttpRequest object using <code>XMLHttpRequest()</code> constructor.</li>
+                <li>Define an event handler for the <code>onreadystatechange</code> event, which checks the readyState and status of the request.</li>
+                <li>Open the request using the appropriate HTTP method and URL.</li>
+                <li>Set any necessary headers (e.g., authentication token).</li>
+                <li>Send the request to the server using <code>send()</code>.</li>
+            </ol>
+
+            <h3>Example:</h3>
+            <p>This example demonstrates how to handle a GET request's response by checking the readyState and status, then displaying the response or an error message.</p>
+
+            <pre>
+<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;script&gt;
+   function handleResponse() {
+       // Creating XMLHttpRequest object
+       var qhttp = new XMLHttpRequest();
+       // Creating callback function
+       qhttp.onreadystatechange = function() {
+          if (qhttp.readyState == 4) {
+             if (qhttp.status == 200) {
+                // Display the response
+                console.log(qhttp.responseText)
+             } else {
+                console.log("Found Error: ", qhttp.status)
+             }
+          }
+       };
+       // Open the request
+       qhttp.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+       // Send the request
+       qhttp.send()
+   }
+&lt;/script&gt;
+&lt;h2&gt;Display Data&lt;/h2&gt;
+&lt;button type="button" onclick="handleResponse()"&gt;Submit&lt;/button&gt;
+&lt;div id="sample"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+            </pre>
+            <button type="button" onclick="handleResponse()">Click Here</button>
+            <h3>Output:</h3>
+            <p id="example">The response from the server will be logged to the console if the request is successful. If there is an error (e.g., network issue), an error message will appear.</p>
+        </section>
+
+        <section class="conclusion">
+            <h2>Conclusion</h2>
+            <p>Handling responses in AJAX allows web pages to dynamically update without needing a full page reload. By checking the status of the response, handling errors, and updating the page accordingly, AJAX can create a smooth, interactive user experience.</p>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

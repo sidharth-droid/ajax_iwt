@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX POST Request Tutorial</title>
+    <style>
+
+h2 {
+    color: #18284f;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #18284f;
+    margin-top: 30px;
+}
+
+p {
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+ul, ol {
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+ul li, ol li {
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 10px;
+    border-left: 5px solid #18284f;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+ul li strong, ol li code {
+    color: #18284f;
+}
+
+code {
+    background-color: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-block;
+    color: black;
+}
+
+pre {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #18284f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #1c3965;
+}
+
+#example {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+    </style>
+    
+</head>
+<body>
+
+<h2>Sending a POST Request using AJAX</h2>
+
+<p>The POST request sends data from a web page to a web server. In this request, the data is sent in the request body and is not visible in the URL. Unlike GET requests, POST requests cannot be cached or bookmarked and allow sending data of any length.</p>
+
+<p><strong>Syntax:</strong><br>
+<code>open('POST', url, true)</code><br>
+Where:<br>
+- <code>POST</code> is the method used to send data.<br>
+- <code>url</code> is the URL of the resource on the server.<br>
+- <code>true</code> sets the request to be asynchronous.
+</p>
+
+<h3>Steps to Use a POST Request:</h3>
+<ol>
+    <li>Create an XMLHttpRequest object: <code>var xhttp = new XMLHttpRequest();</code></li>
+    <li>Define a callback function to handle the server's response.</li>
+    <li>Use the <code>open()</code> method with the <code>POST</code> method and the target URL.</li>
+    <li>Set the request header using <code>setRequestHeader()</code>, specifying the content type as JSON.</li>
+    <li>Send the data to the server using <code>send()</code>.</li>
+</ol>
+
+<h3>Example Code:</h3>
+
+<p>Below is an example that demonstrates how to send data using a POST request with XMLHttpRequest:</p>
+<pre>
+    <code>
+       &lt;script&gt;
+          function sendRecords() {
+             // Creating XMLHttpRequest object
+             var zhttp = new XMLHttpRequest();
+          
+             // JSON document with user input data
+             const mParameters = {
+                title: document.querySelector('#Utitle').value,
+                userid: document.querySelector('#UId').value,
+                body: document.querySelector('#Ubody').value
+             }
+             
+             // Creating callback function to handle the response
+             zhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 201) {
+                   document.getElementById("example").innerHTML = this.responseText;
+                   console.log("Data Posted Successfully")
+                } else if (this.readyState == 4) {
+                   console.log("Error found");
+                }
+             };
+             
+             // Open POST request to the server URL
+             zhttp.open("POST", "https://jsonplaceholder.typicode.com/todos", true);
+          
+             // Set the request header to indicate JSON data
+             zhttp.setRequestHeader('Content-type', 'application/json');
+          
+             // Send the JSON data to the server
+             zhttp.send(JSON.stringify(mParameters));
+          }
+       &lt;/script&gt;
+    </code>
+    </pre>
+    
+
+
+<!-- Form to collect data from the user -->
+<h3>Enter Data to Send in POST Request:</h3>
+<label for="Utitle">Title:</label>
+<input id="Utitle" type="text" name="title"><br>
+
+<label for="UId">UserId:</label>
+<input id="UId" type="number" name="userid"><br>
+
+<label for="Ubody">Body:</label>
+<input id="Ubody" type="text" name="body"><br>
+
+<button type="button" onclick="sendRecords()">Submit</button>
+
+<div id="example"></div>
+
+<h3>How it Works:</h3>
+<p>When the user clicks the "Submit" button, the <code>sendRecords()</code> function is triggered. This function:</p>
+<ol>
+    <li>Creates an XMLHttpRequest object and a JSON document with user input data.</li>
+    <li>Sets up a callback function to handle the response from the server.</li>
+    <li>Opens a POST request to the server with the URL <code>https://jsonplaceholder.typicode.com/todos</code>.</li>
+    <li>Sets the content type header to "application/json".</li>
+    <li>Converts the JSON data into a string using <code>JSON.stringify()</code> and sends it to the server.</li>
+</ol>
+
+<h3>Difference Between PUT and POST Requests:</h3>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>PUT Request</th>
+        <th>POST Request</th>
+    </tr>
+    <tr>
+        <td>Used to update an existing resource.</td>
+        <td>Used to create a new resource.</td>
+    </tr>
+    <tr>
+        <td>Sends the entire resource as the payload.</td>
+        <td>Sends only the updated part of the resource.</td>
+    </tr>
+    <tr>
+        <td>Can be cached.</td>
+        <td>Cannot be cached.</td>
+    </tr>
+    <tr>
+        <td>Idempotent: Multiple identical requests will have the same effect.</td>
+        <td>Non-idempotent: Multiple identical requests will create multiple resources.</td>
+    </tr>
+</table>
+
+<h3>Conclusion:</h3>
+<p>In this tutorial, we learned how to send a POST request using XMLHttpRequest. POST is the most commonly used method for submitting data to a server, whether it's form data or JSON data.</p>
+
+</body>
+</html>

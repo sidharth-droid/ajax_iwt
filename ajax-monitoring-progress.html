@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring AJAX Request Progress</title>
+    <style>
+
+        h2 {
+            color: #18284f;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #18284f;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 10px;
+            border-left: 5px solid #18284f;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        ul li strong, ol li code {
+            color: #18284f;
+        }
+        
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            display: inline-block;
+            color: black;
+        }
+        
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        
+        input {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #18284f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        
+        button:hover {
+            background-color: #1c3965;
+        }
+        
+        #example {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+            </style>
+</head>
+<body>
+
+<h2>Monitoring AJAX Request Progress</h2>
+
+<p>AJAX provides a special feature called "Monitoring Progress," which allows us to track the progress of asynchronous requests made from a web browser to a web server. This feature enables us to provide real-time feedback to users about data transfers (uploads or downloads), request status, and handle errors efficiently.</p>
+
+<p>With progress monitoring, we can:</p>
+<ul>
+    <li>Track data transfer progress (how much data has been transferred out of the total size).</li>
+    <li>Monitor the overall status of the request (in-progress, completed, pending).</li>
+    <li>Handle errors (network issues, server errors) and notify users accordingly.</li>
+</ul>
+
+<h3>Methods to Monitor Progress:</h3>
+<ul>
+    <li><strong>Using <code>onprogress</code> event:</strong> This event triggers periodically while the data transfer is in progress. It's ideal for monitoring large data or file transfers.</li>
+    <li><strong>Using <code>onreadystatechange</code> event:</strong> This event fires whenever the <code>readyState</code> property of the request changes, indicating different stages of the request.</li>
+</ul>
+
+<h3>Example 1: Using <code>onprogress</code> Event</h3>
+
+<p>This example demonstrates how to track the progress of a request (percentage of data transferred) using the <code>onprogress</code> event:</p>
+
+<pre>
+    <code>
+       &lt;script&gt;
+          function displayProgress() {
+             var myObj = new XMLHttpRequest();
+    
+             myObj.onprogress = function(myEvent) {
+                if (myEvent.lengthComputable) {
+                   var transferPercentage = (myEvent.loaded / myEvent.total) * 100;
+                   document.getElementById("status").innerHTML = "Data transfer progress: " + transferPercentage.toFixed(2) + "%";
+                }
+             };
+    
+             myObj.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+    
+             myObj.send();
+          }
+       &lt;/script&gt;
+    </code>
+    </pre>
+    
+
+<button type="button" onclick="displayProgress()">Start Data Transfer</button>
+<div id="status"></div>
+
+<h3>Example 2: Using <code>onreadystatechange</code> Event</h3>
+
+<p>This example demonstrates how to monitor the request status by tracking the readyState of the XMLHttpRequest object:</p>
+<pre>
+    <code>
+       &lt;script&gt;
+          function displayStatus() {
+             // Creating XMLHttpRequest object
+             var myObj = new XMLHttpRequest();
+    
+             // Defining the onreadystatechange event to track request status
+             myObj.onreadystatechange = function() {
+                if (this.readyState == XMLHttpRequest.DONE) {
+                   document.getElementById("status").innerHTML = "Request is completed";
+                } else {
+                   document.getElementById("status").innerHTML = "Request is in progress...";
+                }
+             };
+    
+             // Open the request (GET method)
+             myObj.open("GET", "https://jsonplaceholder.typicode.com/todos", true);
+    
+             // Send the request to the server
+             myObj.send();
+          }
+       &lt;/script&gt;
+    </code>
+    </pre>
+    
+
+
+<button type="button" onclick="displayStatus()">Check Request Status</button>
+<div id="status"></div>
+
+<h3>How It Works:</h3>
+<p>In the first example, we use the <code>onprogress</code> event to periodically track the transfer of data during the request. The event handler checks if the transfer data is computable (i.e., if it has loaded and the total size is known). It then calculates the percentage of data transferred and displays it on the page.</p>
+
+<p>In the second example, we use the <code>onreadystatechange</code> event to monitor the current state of the request by checking the <code>readyState</code> property. If the state is <code>XMLHttpRequest.DONE</code>, it indicates that the request is completed, and we update the status message accordingly.</p>
+
+<h3>Conclusion:</h3>
+<p>With AJAX, it's possible to monitor the progress of requests in real-time. This helps us provide users with feedback about data transfers, track request statuses, and handle errors effectively. Whether you're sending large files or tracking the status of data retrieval, AJAX progress monitoring enhances the user experience by offering transparency and timely feedback.</p>
+
+</body>
+</html>
